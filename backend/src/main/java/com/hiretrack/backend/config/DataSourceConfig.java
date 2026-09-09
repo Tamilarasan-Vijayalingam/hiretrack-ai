@@ -41,12 +41,14 @@ public class DataSourceConfig {
                 int port = uri.getPort() == -1 ? 5432 : uri.getPort();
                 String path = uri.getPath();
 
-                jdbcUrl = "jdbc:postgresql://" + host + ":" + port + path;
+                String query = uri.getQuery() != null ? "?" + uri.getQuery() : "";
+                jdbcUrl = "jdbc:postgresql://" + host + ":" + port + path + query;
 
                 if (uri.getUserInfo() != null && uri.getUserInfo().contains(":")) {
-                    String[] credentials = uri.getUserInfo().split(":");
-                    username = credentials[0];
-                    password = credentials[1];
+                    String userInfo = uri.getUserInfo();
+                    int colonIndex = userInfo.indexOf(':');
+                    username = userInfo.substring(0, colonIndex);
+                    password = userInfo.substring(colonIndex + 1);
                 }
                 log.info("Normalized PostgreSQL connection URL to JDBC format: {}", jdbcUrl);
             } catch (Exception e) {
