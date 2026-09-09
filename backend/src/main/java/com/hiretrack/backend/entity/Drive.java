@@ -36,7 +36,6 @@ public class Drive {
     @Column(name = "eligibility_criteria")
     private String eligibilityCriteria;
     @Enumerated(EnumType.STRING)
-    @org.hibernate.annotations.JdbcType(org.hibernate.dialect.PostgreSQLEnumJdbcType.class)
     @Column(nullable = false)
     private DriveStatus status;
     @CreationTimestamp

@@ -20,7 +20,6 @@ public class User {
     @Column(name = "password_hash", nullable = false)
     private String password;
     @Enumerated(EnumType.STRING)
-    @org.hibernate.annotations.JdbcType(org.hibernate.dialect.PostgreSQLEnumJdbcType.class)
     @Column(nullable = false)
     private Role role;
 
