@@ -17,7 +17,7 @@ public class Alumni {
     private Student student;
     @Column(name = "current_company")
     private String currentCompany;
-    @Column(name = "current_role")
+    @Column(name = "\"current_role\"")
     private String currentRole;
     @Column(name = "package")
     private java.math.BigDecimal packageOffered;
