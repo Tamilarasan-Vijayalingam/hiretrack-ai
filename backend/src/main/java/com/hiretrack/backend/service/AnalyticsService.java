@@ -84,7 +84,7 @@ public class AnalyticsService {
 
         final List<Placement> finalPlacements = allPlacements;
         Map<String, Long> deptCounts = allStudents.stream()
-            .filter(s -> s.getDepartment() != null)
+            .filter(s -> s.getDepartment() != null && s.getDepartment().getName() != null)
             .filter(s -> finalPlacements.stream().anyMatch(p -> p.getStudent() != null && p.getStudent().getId().equals(s.getId())))
             .collect(Collectors.groupingBy(s -> s.getDepartment().getName(), Collectors.counting()));
             
