@@ -1,0 +1,14 @@
+package com.hiretrack.backend.repository;
+
+import com.hiretrack.backend.entity.Student;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import java.util.UUID;
+
+@Repository
+public interface StudentRepository extends JpaRepository<Student, UUID> {
+    java.util.Optional<Student> findByUserId(UUID userId);
+    java.util.Optional<Student> findByEmail(String email);
+    java.util.List<Student> findByDepartmentId(UUID departmentId);
+}
+
