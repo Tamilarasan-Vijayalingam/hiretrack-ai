@@ -16,6 +16,7 @@ export default function AdminDashboard() {
   const { user } = useAuth();
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -24,7 +25,8 @@ export default function AdminDashboard() {
         const res = await api.get(endpoint);
         setStats(res.data);
       } catch (err) {
-        console.error(err);
+        console.error('Failed to load analytics:', err);
+        setError('Failed to load analytics. Please try again later.');
       } finally {
         setLoading(false);
       }
@@ -48,7 +50,9 @@ export default function AdminDashboard() {
     }
   };
 
-  if (loading || !stats) return <div className="p-8 text-center text-slate-500">Loading Analytics...</div>;
+  if (loading) return <div className="p-8 text-center text-slate-500">Loading Analytics...</div>;
+  if (error) return <div className="p-8 text-center text-red-500 bg-red-50 rounded-lg border border-red-200">{error}</div>;
+  if (!stats) return <div className="p-8 text-center text-slate-500">No analytics data available.</div>;
 
   return (
     <div className="space-y-6">
